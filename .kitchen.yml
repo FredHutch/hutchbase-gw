@@ -1,6 +1,6 @@
 ---
 driver:
-  name: lxd_cli
+  name: vagrant
 
 provisioner:
   name: chef_zero
@@ -11,6 +11,7 @@ platforms:
 
 suites:
   - name: default
+    data_bags_path: "test/integration/default/data_bags"
     run_list:
       - recipe[hutchbase-gw::default]
     attributes:
