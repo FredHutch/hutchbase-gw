@@ -1,20 +1,16 @@
 ---
 driver:
-  name: docker
-    use_sudo: false
-    dns:
-      - 140.107.42.11
-      - 140.107.117.11
+  name: lxd_cli
 
 provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-14.04
   - name: ubuntu-16.04
 
 suites:
   - name: default
+    data_bags_path: "test/integration/default/data_bags"
     run_list:
       - recipe[hutchbase-gw::default]
     attributes:
