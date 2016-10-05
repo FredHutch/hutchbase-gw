@@ -10,3 +10,5 @@ issues_url 'https://github.com/FredHutch/hutchbase-gw/issues'
 
 depends 'nginx', '~> 2.7.9'
 depends 'chef-vault'
+depends 'tomcat', '~> 2.3.2'
+depends 'java_se', '~> 8.0'

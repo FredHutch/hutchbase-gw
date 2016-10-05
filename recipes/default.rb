@@ -55,3 +55,15 @@ nginx_site 'hutchbase-gw' do
     'uri' => "#{node['hutchbase-gw']['url']}:#{node['hutchbase-gw']['port']}"
   )
 end
+
+include_recipe 'java_se'
+
+# Install tomcat
+#
+tomcat_install 'hutchbase-min' do
+  version '8.0.37'
+end
+
+tomcat_service 'hutchbase-min' do
+  action :start
+end
