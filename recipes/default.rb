@@ -17,29 +17,29 @@ certfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert']}"
 keyfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert_key']}"
 
 directory node.default['hutchbase-gw']['logdir'] do
-    owner 'root'
-    group 'root'
-    mode '0755'
+  owner 'root'
+  group 'root'
+  mode '0755'
 end
 
 directory etcdir do
-    owner 'root'
-    group 'root'
-    mode '0755'
+  owner 'root'
+  group 'root'
+  mode '0755'
 end
 
 file certfile do
-    content ssl_cert
-    owner 'root'
-    group 'root'
-    mode '0644'
+  content ssl_cert
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
 
 file keyfile do
-    content ssl_cert_key
-    owner 'root'
-    group 'root'
-    mode '0644'
+  content ssl_cert_key
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
 
 include_recipe 'nginx'
