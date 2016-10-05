@@ -4,7 +4,7 @@ maintainer_email 'scicomp@fredhutch.org'
 license 'apache'
 description 'Installs/Configures hutchbase-gw'
 long_description 'Installs/Configures hutchbase-gw'
-version '0.1.0'
+version '0.1.1'
 source_url 'https://github.com/FredHutch/hutchbase-gw'
 issues_url 'https://github.com/FredHutch/hutchbase-gw/issues'
 
