@@ -67,3 +67,17 @@ end
 tomcat_service 'hutchbase-min' do
   action :start
 end
+
+remote_file '/opt/tomcat_hutchbase-min/webapps/hutchbaseExternal.war' do
+  owner 'tomcat_hutchbase-min'
+  group 'tomcat_hutchbase-min'
+  mode '0644'
+  source node['hutchbase-gw']['source']['url']
+  checksum node['hutchbase-gw']['source']['checksum']
+  notifies :restart, 'tomcat_service[hutchbase-min]'
+end
+node.default['hutchbase-gw']['source'] = {
+  'url' => 'http://octopus.fhcrc.org/misc/hutchbaseExternal.war',
+  'checksum' => 'd35aaff5aceca47345c148ec7390de3f'\
+                '1ff81b8fa27839165867788170bc2b7c'
+}

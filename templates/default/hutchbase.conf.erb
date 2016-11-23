@@ -26,6 +26,6 @@ server {
     # Fix the “It appears that your reverse proxy set up is broken" error.
     proxy_pass  <%= @uri %>;
     proxy_read_timeout  90;
-    proxy_redirect  <%= @uri %> https://<%= @server_name %>;
+    proxy_redirect  http:// https://;
   }
 }
