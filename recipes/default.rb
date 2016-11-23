@@ -9,8 +9,8 @@
 
 include_recipe 'chef-vault::default'
 
-ssl_cert = chef_vault_item('hutchbase-gw', 'cert')['content']
-ssl_cert_key = chef_vault_item('hutchbase-gw', 'key')['content']
+ssl_cert = chef_vault_item('hutchbase-gw', 'tls')['cert']
+ssl_cert_key = chef_vault_item('hutchbase-gw', 'tls')['key']
 
 etcdir = '/etc/hutchbase-gw'
 certfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert']}"
