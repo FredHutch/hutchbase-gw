@@ -16,6 +16,10 @@ etcdir = '/etc/hutchbase-gw'
 certfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert']}"
 keyfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert_key']}"
 
+sudoers = chef_vault_item('hutchbase-gw', 'sudo')['users']
+node.default['authorization']['sudo']['users'] = sudoers
+include_recipe 'sudo'
+
 directory node.default['hutchbase-gw']['logdir'] do
   owner 'root'
   group 'root'
