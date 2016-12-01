@@ -77,7 +77,7 @@ remote_file '/opt/tomcat_hutchbase-min/webapps/sample.war' do
   group 'tomcat_hutchbase-min'
   mode '0644'
   source 'https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war'
-  checksum node['hutchbase-gw']['source']['checksum']
+  checksum '89b33caa5bf4cfd235f060c396cb1a5acb2734a1366db325676f48c5f5ed92e5'
   notifies :restart, 'tomcat_service[hutchbase-min]', :delayed
 end
 
