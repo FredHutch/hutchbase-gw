@@ -16,6 +16,10 @@ etcdir = '/etc/hutchbase-gw'
 certfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert']}"
 keyfile = "#{etcdir}/#{node['hutchbase-gw']['ssl_cert_key']}"
 
+sudoers = chef_vault_item('hutchbase-gw', 'sudo')['users']
+node.default['authorization']['sudo']['users'] = sudoers
+include_recipe 'sudo'
+
 directory node.default['hutchbase-gw']['logdir'] do
   owner 'root'
   group 'root'
@@ -68,16 +72,20 @@ tomcat_service 'hutchbase-min' do
   action :start
 end
 
+remote_file '/opt/tomcat_hutchbase-min/webapps/sample.war' do
+  owner 'tomcat_hutchbase-min'
+  group 'tomcat_hutchbase-min'
+  mode '0644'
+  source 'https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war'
+  checksum node['hutchbase-gw']['source']['checksum']
+  notifies :restart, 'tomcat_service[hutchbase-min]', :delayed
+end
+
 remote_file '/opt/tomcat_hutchbase-min/webapps/hutchbaseExternal.war' do
   owner 'tomcat_hutchbase-min'
   group 'tomcat_hutchbase-min'
   mode '0644'
   source node['hutchbase-gw']['source']['url']
   checksum node['hutchbase-gw']['source']['checksum']
-  notifies :restart, 'tomcat_service[hutchbase-min]'
+  notifies :restart, 'tomcat_service[hutchbase-min]', :delayed
 end
-node.default['hutchbase-gw']['source'] = {
-  'url' => 'http://octopus.fhcrc.org/misc/hutchbaseExternal.war',
-  'checksum' => 'd35aaff5aceca47345c148ec7390de3f'\
-                '1ff81b8fa27839165867788170bc2b7c'
-}
