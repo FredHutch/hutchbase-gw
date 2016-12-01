@@ -70,6 +70,7 @@ end
 
 tomcat_service 'hutchbase-min' do
   action :start
+  env_vars [{ 'CATALINA_OPTS' => '-Djava.net.preferIPv4Stack=true' }]
 end
 
 remote_file '/opt/tomcat_hutchbase-min/webapps/sample.war' do
